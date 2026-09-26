@@ -1,0 +1,10 @@
+{
+  "description": "Transforming medical and genetic information into a visually striking blog, this platform utilizes a techwear aesthetic to enhance user engagement and readability.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
