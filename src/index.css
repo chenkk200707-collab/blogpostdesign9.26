@@ -331,7 +331,6 @@ a {
   overflow: hidden;
   border: 1px solid var(--line-bright);
   clip-path: polygon(0 0, 88% 0, 100% 12%, 100% 100%, 0 100%);
-  background: var(--panel);
 }
 
 .visual-frame::before,
@@ -714,7 +713,6 @@ a {
   height: 245px;
   position: relative;
   overflow: hidden;
-  background: var(--ink-soft);
 }
 
 .article-01 .card-image {
@@ -1176,4 +1174,445 @@ footer > p,
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ============================================================
+   PURE BLANK // 纯净留白战术框架
+   ============================================================ */
+
+.pure-blank-frame,
+.pure-blank-card {
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(101, 237, 240, 0.05),
+      transparent 55%
+    ),
+    var(--ink-soft);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line-bright);
+}
+
+.pure-blank-frame .blank-blueprint-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 92%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 92%);
+}
+
+.pure-blank-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 16px 16px;
+  pointer-events: none;
+}
+
+.pure-blank-frame::before,
+.pure-blank-frame::after,
+.pure-blank-card::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--signal);
+  pointer-events: none;
+}
+
+.pure-blank-frame::before {
+  top: 10px;
+  left: 10px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.pure-blank-frame::after {
+  bottom: 10px;
+  right: 10px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.pure-blank-card::after {
+  bottom: 10px;
+  left: 10px;
+  border-right: 0;
+  border-top: 0;
+}
+/* ============================================================
+   ARTICLE BODY // 长文正文
+   ============================================================ */
+
+.article-body {
+  padding: 100px 4vw 120px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.article-head {
+  max-width: 900px;
+  padding-bottom: 55px;
+  margin-bottom: 80px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.article-head h2 {
+  margin: 16px 0 26px;
+  font-family: var(--body);
+  font-size: clamp(40px, 5vw, 76px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.article-deck {
+  max-width: 720px;
+  margin: 0;
+  color: #4a4b48;
+  font-family: var(--body);
+  font-size: 17.5px;
+  font-weight: 300;
+  line-height: 1.9;
+}
+
+.article-section {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto 95px;
+  padding-left: 96px;
+}
+
+.section-num {
+  position: absolute;
+  left: 0;
+  top: -8px;
+  color: #b8b9b5;
+  font: 800 68px/1 var(--display);
+  letter-spacing: -0.04em;
+}
+
+.article-section h3 {
+  margin: 0 0 24px;
+  font-family: var(--display);
+  font-size: clamp(22px, 2.2vw, 32px);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.article-section p {
+  margin: 0 0 20px;
+  color: #2a2b28;
+  font-family: var(--body);
+  font-size: 16.5px;
+  font-weight: 400;
+  line-height: 2.05;
+  letter-spacing: 0.01em;
+}
+
+.article-section p + p {
+  margin-top: 4px;
+}
+
+.article-section strong {
+  background: var(--signal);
+  padding: 1px 5px;
+  font-weight: 700;
+}
+
+/* ============================================================
+   SKELETON LINES
+   ============================================================ */
+
+.skeleton-line {
+  height: 11px;
+  margin: 0 0 14px;
+  background: #d8d8d3;
+  border-radius: 1px;
+}
+
+.skeleton-line.short {
+  width: 62%;
+}
+
+.compare-card .skeleton-line {
+  background: #d8d8d3;
+  margin-bottom: 10px;
+}
+
+/* ============================================================
+   COMPARE GRID
+   ============================================================ */
+
+.compare-grid {
+  margin: 32px 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.compare-card {
+  padding: 26px 28px;
+  border: 1px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.compare-card + .compare-card {
+  border-left: 0;
+}
+
+.compare-tag {
+  font: 800 13px/1 var(--display);
+  letter-spacing: 2px;
+}
+
+.compare-card p {
+  margin: 0;
+  color: #2a2b28;
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.compare-verdict {
+  margin-top: auto;
+  color: var(--signal);
+  background: var(--ink);
+  padding: 7px 11px;
+  font: 700 10px/1 var(--mono);
+  letter-spacing: 1.5px;
+  align-self: flex-start;
+}
+
+/* ============================================================
+   CHROMOSOME VIZ
+   ============================================================ */
+
+.chromosome-viz {
+  margin: 8px 0 42px;
+  padding: 26px 28px 20px;
+  border: 1px solid var(--ink);
+  background: #e8e7e2;
+}
+
+.chromosome-track {
+  position: relative;
+  height: 22px;
+  display: flex;
+  gap: 4px;
+}
+
+.chromosome-band {
+  flex: 1;
+  background: repeating-linear-gradient(
+    90deg,
+    #2a2b28 0 3px,
+    transparent 3px 6px,
+    #2a2b28 6px 8px,
+    transparent 8px 14px,
+    #2a2b28 14px 16px,
+    transparent 16px 24px
+  );
+  opacity: 0.85;
+}
+
+.chromosome-marker {
+  position: absolute;
+  top: -10px;
+  left: 62%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 42px;
+  border-left: 2px solid var(--signal);
+}
+
+.chromosome-marker span {
+  position: absolute;
+  bottom: -2px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  background: var(--signal);
+}
+
+.chromosome-meta {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid #bbbcb8;
+  display: flex;
+  justify-content: space-between;
+  font: 700 11px/1 var(--mono);
+  letter-spacing: 1.5px;
+  color: #4a4b48;
+}
+
+.chromosome-meta span:last-child {
+  color: var(--ink);
+  background: var(--signal);
+  padding: 4px 8px;
+}
+
+/* ============================================================
+   EVIDENCE GRID
+   ============================================================ */
+
+.evidence-grid {
+  margin: 8px 0 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+.evidence-card {
+  padding: 22px 22px 24px;
+  border: 1px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #e8e7e2;
+}
+
+.evidence-card + .evidence-card {
+  border-left: 0;
+}
+
+.evidence-tag {
+  font: 700 10px/1 var(--mono);
+  letter-spacing: 1.5px;
+  color: #737470;
+}
+
+.evidence-card strong {
+  font: 800 18px/1.15 var(--display);
+  letter-spacing: 0.02em;
+}
+
+.evidence-card p {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #4a4b48;
+}
+
+/* ============================================================
+   MANIFESTO — single column
+   ============================================================ */
+
+.manifesto {
+  grid-template-columns: 1fr;
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 760px) {
+  .article-body {
+    padding: 70px 20px 90px;
+  }
+
+  .article-section {
+    padding-left: 0;
+    padding-top: 62px;
+    margin-bottom: 70px;
+  }
+
+  .section-num {
+    font-size: 46px;
+    top: 0;
+  }
+
+  .compare-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .compare-card + .compare-card {
+    border-left: 1px solid var(--ink);
+    border-top: 0;
+  }
+
+  .evidence-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .evidence-card + .evidence-card {
+    border-left: 1px solid var(--ink);
+    border-top: 0;
+  }
+
+  .chromosome-viz {
+    padding: 20px;
+  }
+
+  .chromosome-meta {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+/* ============================================================
+   ARTICLE HEAD CENTERED
+   ============================================================ */
+
+.article-head {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 55px;
+  margin-bottom: 80px;
+  border-bottom: 2px solid var(--ink);
+  text-align: center;
+}
+
+.article-head h2 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.article-deck {
+  margin-left: auto;
+  margin-right: auto;
+}
+/* ============================================================
+   CHROMOSOME VIZ // 暂时隐藏，代码保留
+   ============================================================ */
+
+.chromosome-viz {
+  display: none;
+}
+/* ============================================================
+   ARTICLE SECTION HEADERS // 暂时隐藏，代码保留
+   ============================================================ */
+
+.section-num,
+.article-section h3 {
+  display: none;
+}
+
+.article-section {
+  padding-left: 0;
+}
+/* ============================================================
+   YELLOW HIGHLIGHTS // 暂时隐藏
+   ============================================================ */
+
+.compare-verdict {
+  display: none;
+}
+
+.article-section strong {
+  background: transparent;
+  padding: 0;
+  font-weight: 700;
 }

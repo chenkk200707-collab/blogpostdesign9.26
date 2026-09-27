@@ -1,65 +1,3 @@
-import { useMemo, useState } from "react";
-
-type Article = {
-  id: string;
-  category: "Genetics" | "Metabolic" | "Lifestyle";
-  code: string;
-  title: string;
-  titleEn: string;
-  excerpt: string;
-  date: string;
-  read: string;
-  image: string;
-  position: string;
-};
-
-const articles: Article[] = [
-  {
-    id: "01",
-    category: "Genetics",
-    code: "GEN/RREB1",
-    title: "DECODING RREB1: THE GENETIC SWITCH BEHIND BLOOD SUGAR",
-    titleEn: "THE GENETIC SWITCH",
-    excerpt:
-      "From pancreatic islet cells to genome-wide association studies — how we understand RREB1's influence on type 2 diabetes risk.",
-    date: "2025.02.18",
-    read: "08 MIN",
-    image:
-      "https://images.unsplash.com/photo-1637929476734-bd7f5f78e40a?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=85&w=1400",
-    position: "center",
-  },
-  {
-    id: "02",
-    category: "Metabolic",
-    code: "MET/GLOBAL",
-    title: "THE GLOBAL DIABETES MAP: NUMBERS STILL RISING",
-    titleEn: "A GLOBAL SIGNAL",
-    excerpt:
-      "Numbers are more than statistics. We trace regional disparities, risk patterns, and intervention windows from epidemiological data.",
-    date: "2025.02.04",
-    read: "06 MIN",
-    image:
-      "https://images.unsplash.com/photo-1634063182137-e804a00b2bf8?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=85&w=1200",
-    position: "center 35%",
-  },
-  {
-    id: "03",
-    category: "Lifestyle",
-    code: "LIF/ACTIVE",
-    title: "GENES ARE NOT DESTINY: HOW EXERCISE SHIFTS THE RISK CURVE",
-    titleEn: "MOVE THE CURVE",
-    excerpt:
-      "Same genetic predisposition, different life trajectories. The real effect of regular exercise on insulin sensitivity.",
-    date: "2025.01.26",
-    read: "05 MIN",
-    image:
-      "https://images.unsplash.com/photo-1758520145147-c30bc656f314?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=85&w=1200",
-    position: "center",
-  },
-];
-
-const categories = ["All", "Genetics", "Metabolic", "Lifestyle"] as const;
-
 function Crosshair() {
   return (
     <span className="crosshair" aria-hidden="true">
@@ -68,49 +6,57 @@ function Crosshair() {
   );
 }
 
+function ChromosomeViz() {
+  return (
+    <div className="chromosome-viz" aria-hidden="true">
+      <div className="chromosome-track">
+        <div className="chromosome-band" />
+        <div className="chromosome-band" />
+        <div className="chromosome-band" />
+        <div className="chromosome-band" />
+        <div className="chromosome-marker">
+          <span />
+        </div>
+      </div>
+      <div className="chromosome-meta">
+        <span>CHR 06</span>
+        <span>LOCUS / 6P24.3</span>
+        <span>RREB1</span>
+      </div>
+    </div>
+  );
+}
+
 function App() {
-  const [activeCategory, setActiveCategory] = useState<(typeof categories)[number]>(
-    "All",
-  );
-
-  const visibleArticles = useMemo(
-    () =>
-      activeCategory === "All"
-        ? articles
-        : articles.filter((article) => article.category === activeCategory),
-    [activeCategory],
-  );
-
-  const scrollToArticles = () => {
-    document.querySelector("#articles")?.scrollIntoView({ behavior: "smooth" });
+  const scrollTo = (id: string) => {
+    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div className="app-shell">
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Gene Scope Home">
-          <span className="brand-mark">GS</span>
-          <span className="brand-copy">
-            <strong>GENE.SCOPE</strong>
-            <small>MEDICAL INTELLIGENCE / 01</small>
-          </span>
+        <a className="brand" href="#top" aria-label="Home">
+          <span className="brand-mark">G</span>
         </a>
 
-        <nav className="primary-nav" aria-label="Primary navigation">
-          <a className="is-active" href="#top">
-            <span>01</span>[ HOME ]
+        <nav className="primary-nav">
+          <a href="#top">
+            <span>01</span>
+            HOME
           </a>
-          <a href="#articles">
-            <span>02</span>[ ARCHIVE ]
+          <a href="#article">
+            <span>02</span>
+            ARTICLE
           </a>
           <a href="#about">
-            <span>03</span>[ ABOUT ]
+            <span>03</span>
+            ABOUT
           </a>
         </nav>
 
         <div className="system-status">
           <span className="status-dot" />
-          SYS ONLINE
+          SYSTEM ONLINE
         </div>
       </header>
 
@@ -123,9 +69,9 @@ function App() {
 
           <div className="hero-copy">
             <div className="eyebrow">
-              <span>RESEARCH FILE / 024</span>
+              <span>FILE 01</span>
               <span className="eyebrow-line" />
-              <span>UPDATED 2025</span>
+              <span>UPDATED 2026</span>
             </div>
 
             <p className="hero-kicker">THE IMPORTANCE OF</p>
@@ -133,61 +79,144 @@ function App() {
               GENETICS
               <span>IN TYPE 2 DIABETES</span>
             </h1>
-            <p className="hero-cn-title">
-              HOW GENES CONTRIBUTE TO TYPE 2 DIABETES
-            </p>
-            <p className="hero-intro">
-              RREB1 is more than a gene code. It may influence how pancreatic
-              islet cells sense glucose, release insulin, and ultimately alter a
-              person&apos;s metabolic risk profile.
-            </p>
+            <p className="hero-cn-title">HOW GENES CONTRIBUTE TO TYPE 2 DIABETES</p>
 
             <div className="hero-actions">
-              <button className="primary-action" onClick={scrollToArticles}>
-                <span>ACCESS FULL ARCHIVE</span>
+              <button className="primary-action" onClick={() => scrollTo("#article")}>
+                <span>READ ARTICLE</span>
                 <span aria-hidden="true">↗</span>
               </button>
-              <div className="file-meta">
-                <span>FILE SIZE / 08 MIN</span>
-                <span>CLASS / GENETICS</span>
-              </div>
             </div>
           </div>
 
           <div className="hero-visual">
-            <div className="visual-frame">
-              <img
-                src={articles[0].image}
-                alt="DNA double helix model on dark background"
-              />
+            <div className="visual-frame pure-blank-frame">
+              <div className="blank-blueprint-grid" />
               <div className="image-screen" />
               <Crosshair />
-              <div className="scan-label label-top">
-                <span>SUBJECT</span>
-                RREB1 / 6P24.3
-              </div>
-              <div className="scan-label label-bottom">
-                <span>SCAN STATUS</span>
-                ANALYSIS COMPLETE
-              </div>
-              <div className="vertical-code">SEQ.006839 / A—T—G—C</div>
             </div>
-            <div className="visual-index" aria-hidden="true">
-              <span>01</span>
-              <i />
-              <span>04</span>
-            </div>
-          </div>
-
-          <div className="hero-side-note" aria-hidden="true">
-            GS // CLINICAL GENOMICS OBSERVATION UNIT
           </div>
         </section>
+
+        <article className="article-body" id="article">
+          <header className="article-head">
+            <span className="section-code">FEATURE / GENETICS</span>
+            <h2>
+              The Importance of Genetics
+              <br />
+              in Type 2 Diabetes
+            </h2>
+            <p className="article-deck">
+              New research is looking at type 2 diabetes from a genetic angle — and one gene in particular, RREB1, may help explain why some people are born with an innately higher risk.
+            </p>
+          </header>
+
+          <section className="article-section" id="sec-00">
+            <div className="section-num">00</div>
+            <h3>THE HIDDEN VARIABLE</h3>
+            <p>
+              It&apos;s common knowledge that consuming highly processed foods and skipping the gym isn&apos;t exactly the optimal routine for our bodies. Now more than ever, health concerns associated with nutritional and environmental decline are on the rise. However, our bodies have been hiding a secret within our very own genetics.
+            </p>
+            <p>
+              Historically, type 2 diabetes has been diagnosed and treated based on measurable characteristics such as body weight and blood sugar levels. But new research is looking at type 2 diabetes from a genetic angle, which can help explain if some people are born with an innately higher risk.
+            </p>
+          </section>
+
+          <section className="article-section" id="sec-01">
+            <div className="section-num">01</div>
+            <h3>TWO PATIENTS, TWO TRAJECTORIES</h3>
+            <div className="compare-grid">
+              <div className="compare-card">
+                <span className="compare-tag">PATIENT A</span>
+                <p>Lifts 5x a week, maintains a healthy weight, and eats a balanced diet.</p>
+                <span className="compare-verdict">STILL AT RISK?</span>
+              </div>
+              <div className="compare-card">
+                <span className="compare-tag">PATIENT B</span>
+                <p>Lives a sedentary lifestyle, is overweight, and frequently has junk food.</p>
+                <span className="compare-verdict">STILL PROTECTED?</span>
+              </div>
+            </div>
+            <p>
+              If you thought Patient B has a diabetes diagnosis waiting for them, while Patient A is completely safe, you&apos;d be incorrect. While lifestyle plays a heavy role, Patient A could still develop type 2 diabetes if they carry certain genetic risk factors — and Patient B might never develop it if they possess genetics that are protective.
+            </p>
+            <p>
+              This demonstrates how a person&apos;s diagnosis fate is also influenced by the unseen, yet all-encompassing instructions written in our DNA.
+            </p>
+          </section>
+
+          <section className="article-section" id="sec-02">
+            <div className="section-num">02</div>
+            <h3>THE ROLE OF RREB1</h3>
+            <p>
+              Identifying the exact mechanisms behind diabetes can be done by studying specific regions of the human genome. Recently, researchers have zoomed in on a gene called <strong>Ras-Responsive Element Binding Protein 1 (RREB1)</strong>.
+            </p>
+            <ChromosomeViz />
+            <p>
+              Our DNA contains thousands of genes, and many of them are responsible for building our cells and their processes. Some genes are what&apos;s known as transcription factors, which are responsible for telling other genes when to increase, or decrease, their function. RREB1 is a transcription factor.
+            </p>
+            <p>
+              Human population research has shown that genetic mutations in the RREB1 gene sequence affect a person&apos;s risk for type 2 diabetes.
+            </p>
+          </section>
+
+          <section className="article-section" id="sec-03">
+            <div className="section-num">03</div>
+            <h3>WHEN RREB1 FAILS</h3>
+            <p>
+              To determine how RREB1 works within the genome, researchers investigated what happens when there is a loss of function in RREB1 — meaning the gene&apos;s activity was either turned down or shut down. They decreased RREB1 function in both human cell and animal models to predict RREB1&apos;s effects on metabolic disease.
+            </p>
+            <p>
+              First, they found that in the pancreas, RREB1 is necessary for normal beta cell development. Beta cells produce insulin, which we need to prevent high blood sugar. When RREB1 loses function, these beta cells become impaired. This leads them to store less insulin and struggle to release it efficiently when blood sugar spikes — for example, after a meal.
+            </p>
+          </section>
+
+          <section className="article-section" id="sec-04">
+            <div className="section-num">04</div>
+            <h3>WHAT THE MODELS SHOWED</h3>
+            <div className="evidence-grid">
+              <div className="evidence-card">
+                <span className="evidence-tag">MODEL / 01</span>
+                <strong>ZEBRAFISH</strong>
+                <p>Lower insulin response, smaller livers and bodies when RREB1 was lost.</p>
+              </div>
+              <div className="evidence-card">
+                <span className="evidence-tag">MODEL / 02</span>
+                <strong>HUMAN BETA CELLS</strong>
+                <p>Without RREB1, beta cells showed a lower capacity for insulin.</p>
+              </div>
+              <div className="evidence-card">
+                <span className="evidence-tag">MODEL / 03</span>
+                <strong>PATIENT MUTATIONS</strong>
+                <p>Insulin secretion decreased, stayed the same, or even improved — depending on the mutation.</p>
+              </div>
+            </div>
+            <p>
+              And since RREB1 is a transcription factor, removing it from the genomic equation also lowered other genes that regulate insulin response and beta cell development.
+            </p>
+          </section>
+
+          <section className="article-section" id="sec-05">
+            <div className="section-num">05</div>
+            <h3>PROTECTIVE ALLELES</h3>
+            <p>
+              Depending on the type of mutation in patients&apos; RREB1 gene, insulin secretion was either decreased, saw no change, or even improved. So not only do mutations in RREB1 alter our predetermined odds for type 2 diabetes — some can also lower it. This is called a <strong>protective allele</strong>.
+            </p>
+          </section>
+
+          <section className="article-section" id="sec-06">
+            <div className="section-num">06</div>
+            <h3>WHY THIS MATTERS</h3>
+            <p>
+              With over 830 million people living with diabetes, there&apos;s no question that diabetes is a global issue that brings a social and economic burden. When we look at diabetes through a genetic lens, we can start coming up with ways of preventing cases — by determining someone&apos;s genetic risk of developing diabetes before any symptoms show, and treating it as a complex metabolic disorder, rather than a result of bad lifestyle choices.
+            </p>
+          </section>
+        </article>
 
         <section className="data-band" aria-label="Global diabetes data">
           <div className="warning-label">
             <span>GLOBAL DATA</span>
-            <strong>ALERT / 2025</strong>
+            <strong>ALERT / 2026</strong>
           </div>
           <div className="big-stat">
             <strong>830</strong>
@@ -201,73 +230,6 @@ function App() {
           <div className="data-source">
             <span>DATA SOURCE</span>
             WHO / GLOBAL REPORT
-            <div className="barcode" aria-hidden="true" />
-          </div>
-        </section>
-
-        <section className="articles-section" id="articles">
-          <div className="section-heading">
-            <div>
-              <span className="section-code">ARCHIVE / LATEST</span>
-              <h2>RESEARCH ARCHIVES</h2>
-              <p>INDEXED INTELLIGENCE FILES</p>
-            </div>
-            <div className="section-count">
-              <span>INDEXED</span>
-              <strong>024</strong>
-              <span>FILES</span>
-            </div>
-          </div>
-
-          <div className="filter-row" role="group" aria-label="Article category filter">
-            {categories.map((category, index) => (
-              <button
-                key={category}
-                className={activeCategory === category ? "active" : ""}
-                onClick={() => setActiveCategory(category)}
-              >
-                <span>0{index + 1}</span>
-                {category}
-              </button>
-            ))}
-          </div>
-
-          <div className="article-grid">
-            {visibleArticles.map((article, index) => (
-              <article
-                className={`article-card article-${article.id}`}
-                key={article.id}
-              >
-                <div className="card-image">
-                  <img
-                    src={article.image}
-                    alt=""
-                    style={{ objectPosition: article.position }}
-                  />
-                  <div className="card-overlay" />
-                  <span className="card-number">/{article.id}</span>
-                  <span className="access-message">ACCESSING DATA...</span>
-                  <Crosshair />
-                </div>
-                <div className="card-content">
-                  <div className="card-meta">
-                    <span>{article.code}</span>
-                    <span>{article.date}</span>
-                  </div>
-                  <p className="card-en-title">{article.titleEn}</p>
-                  <h3>{article.title}</h3>
-                  <p className="card-excerpt">{article.excerpt}</p>
-                  <div className="card-footer">
-                    <span className="category-tag">{article.category}</span>
-                    <a href={`#article-${article.id}`}>
-                      OPEN FILE <span aria-hidden="true">→</span>
-                    </a>
-                    <span className="read-time">{article.read}</span>
-                  </div>
-                </div>
-                {index === 0 && <span className="featured-flag">FEATURED</span>}
-              </article>
-            ))}
           </div>
         </section>
 
@@ -283,23 +245,22 @@ function App() {
               into <span>actionable intelligence.</span>
             </h2>
           </div>
-          <p>
-            GENE.SCOPE focuses on genetics, metabolic health, and precision medicine.
-            We dissect research papers, verify data, and use clear visual language
-            to connect laboratory findings with real people.
-          </p>
         </section>
       </main>
 
       <footer>
         <div className="footer-brand">
-          <span>GS</span>
-          <strong>GENE.SCOPE</strong>
+          <span>G</span>
         </div>
-        <p>MEDICAL INTELLIGENCE ARCHIVE</p>
+        <p>
+          © 2026 GENE.SCOPE — CLINICAL GENOMICS OBSERVATION UNIT
+          <br />
+          ALL DATA FOR RESEARCH PURPOSES ONLY
+        </p>
         <div className="footer-links">
-          <a href="#top">BACK TO TOP ↑</a>
-          <span>© 2025 / ALL DATA VERIFIED</span>
+          <a href="#top">HOME</a>
+          <a href="#article">ARTICLE</a>
+          <a href="#about">ABOUT</a>
         </div>
       </footer>
     </div>
