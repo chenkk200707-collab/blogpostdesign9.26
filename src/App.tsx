@@ -253,7 +253,7 @@ function App() {
           <span>G</span>
         </div>
         <p>
-          © 2026 GENE.SCOPE — CLINICAL GENOMICS OBSERVATION UNIT
+          © 2026 CLINICAL GENOMICS OBSERVATION UNIT
           <br />
           ALL DATA FOR RESEARCH PURPOSES ONLY
         </p>
